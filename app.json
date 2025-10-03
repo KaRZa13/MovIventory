@@ -26,11 +26,18 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
+      [
+       "expo-secure-store",
+        {
+          "configureAndroidBackup": true,
+          "faceIDPermission": "Allow $(PRODUCT_NAME) to access your Face ID biometric data."
+        }
+        ],
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/logo.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
@@ -44,5 +51,6 @@
       "typedRoutes": true,
       "reactCompiler": true
     }
+    
   }
 }
