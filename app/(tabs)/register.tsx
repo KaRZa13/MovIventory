@@ -16,6 +16,7 @@ export default function RegisterScreen({ navigation }: /*props*/ any) {
   const [address, setAddress] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [city, setCity] = useState("");
+  const [fidelityCard, setFidelityCard] = useState("");
 
   const handleRegister = () => {
     const userData = {
@@ -25,6 +26,7 @@ export default function RegisterScreen({ navigation }: /*props*/ any) {
       address,
       zipcode,
       city,
+      fidelityCard,
     };
     Object.entries(userData).forEach(([key, value]) => {
         save(key, value);
@@ -83,6 +85,13 @@ export default function RegisterScreen({ navigation }: /*props*/ any) {
         style={styles.input}
         value={city}
         onChangeText={setCity}
+      />
+      <TextInput
+        placeholder="Carte fidélité"
+        placeholderTextColor="#888"
+        style={styles.input}
+        value={fidelityCard}
+        onChangeText={setFidelityCard}
       />
 
       <TouchableOpacity style={styles.button} onPress={handleRegister}>

@@ -1,9 +1,8 @@
 import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Link, usePathname } from "expo-router";
+import { Link } from "expo-router";
 
 export default function TabTwoScreen() {
-  const pathname = usePathname();
   return (
     <View>
       <Text style={styles.title}>Création de compte</Text>
@@ -19,8 +18,7 @@ export default function TabTwoScreen() {
         </TouchableOpacity>
       </Link>
 
-      {/* Mettre register pour rediriger */}
-      <Link href="/" asChild>
+      <Link href="/register" asChild>
         <TouchableOpacity style={styles.formButton} onPress={() => {}}>
           <Text style={styles.formText}>
             Remplir le formulaire manuellement
