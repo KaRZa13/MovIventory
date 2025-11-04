@@ -272,10 +272,10 @@ export default function Profile() {
 
 const styles = StyleSheet.create({
   header: {
-    marginHorizontal: 8,
-    padding: 24,
-    borderRadius: 12,
-    marginTop: 32,
+    width: '100%',
+    paddingTop: 48,
+    paddingBottom: 32,
+    paddingHorizontal: 24,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'

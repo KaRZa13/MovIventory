@@ -1,6 +1,6 @@
 const BASE_URL = 'https://api.jsonbin.io/v3/b/68ddb860ae596e708f02f1ca'
 
-export interface Location {
+export interface Cinema {
   id: string
   name: string
   address1: string
@@ -10,11 +10,11 @@ export interface Location {
   longitude: number
   parkingInfo: string
   description: string
-  publicTransportInfo: string
+  publicTransport: string
 }
 
 export interface ApiResponse {
-  record: Location[]
+  record: Cinema[]
   metadata?: {
     id: string
     private: boolean
@@ -22,12 +22,12 @@ export interface ApiResponse {
   }
 }
 
-export async function fetchLocation(id: string): Promise<Location | undefined> {
-  const res = await fetchLocations()
+export async function fetchCinema(id: string): Promise<Cinema | undefined> {
+  const res = await fetchCinemas()
   return res.record.find(m => m.id === id)
 }
 
-export async function fetchLocations(): Promise<ApiResponse> {
+export async function fetchCinemas(): Promise<ApiResponse> {
   try {
     const response = await fetch(BASE_URL, {
       method: 'GET',

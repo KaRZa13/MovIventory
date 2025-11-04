@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react'
-import {Text, Image, StyleSheet, ActivityIndicator, ScrollView, useColorScheme, TouchableOpacity, Linking, Alert} from 'react-native'
+import {Image, StyleSheet, ActivityIndicator, ScrollView, useColorScheme, TouchableOpacity, Linking, Alert} from 'react-native'
 import {Stack, useLocalSearchParams} from 'expo-router'
 import {fetchMovie, Movie} from '@/services/api/moviesApi'
 import { Colors } from '@/constants/theme'
 import {ThemedView} from "@/components/themed-view";
+import {ThemedText} from "@/components/themed-text";
 
 export default function MovieDetail() {
   const colorScheme = useColorScheme()
@@ -14,7 +15,7 @@ export default function MovieDetail() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!id) return;
+    if (!id) return
     (async () => {
       try {
         const movie = await fetchMovie(id)
@@ -44,7 +45,7 @@ export default function MovieDetail() {
   }
 
   if (loading) return <ActivityIndicator style={styles.center}/>
-  if (error) return <Text style={styles.center}>Erreur : {error}</Text>
+  if (error) return <ThemedText style={styles.center}>Erreur : {error}</ThemedText>
   if (!movie) return null
 
   return (
@@ -60,15 +61,15 @@ export default function MovieDetail() {
       <ScrollView contentContainerStyle={[styles.container, {backgroundColor: Colors[colorScheme ?? 'light'].background}]}>
         <Image source={{uri: movie.graphicUrl}} style={styles.image}/>
         <ThemedView style={styles.row}>
-          <Text style={[styles.date, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>Sortie : {movie.openingDate}</Text>
-          <Text style={[styles.date, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>Durée : {movie.runTime}min</Text>
+          <ThemedText style={[styles.date, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>Sortie : {movie.openingDate}</ThemedText>
+          <ThemedText style={[styles.date, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>Durée : {movie.runTime}min</ThemedText>
         </ThemedView>
         {movie.trailerUrl && (
           <TouchableOpacity style={[styles.trailerButton, {backgroundColor: Colors[colorScheme ?? 'light'].primaryAccent}]} onPress={openYoutubeTrailer}>
-            <Text style={[styles.trailerText, {color: Colors[colorScheme ?? 'light'].textPrimary}]}>🎬 Voir la bande-annonce</Text>
+            <ThemedText style={[styles.trailerText, {color: Colors[colorScheme ?? 'light'].textPrimary}]}>🎬 Voir la bande-annonce</ThemedText>
           </TouchableOpacity>
         )}
-        <Text style={[styles.desc, {color: Colors[colorScheme ?? 'light'].textTertiary}]}>{movie.description}</Text>
+        <ThemedText style={[styles.desc, {color: Colors[colorScheme ?? 'light'].textTertiary}]}>{movie.description}</ThemedText>
       </ScrollView>
     </>
   )

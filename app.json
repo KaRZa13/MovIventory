@@ -45,7 +45,8 @@
           "fonts": [
             {
               "fontFamily": "Poppins",
-              "fontDefinitions": [{
+              "fontDefinitions": [
+                {
                   "path": "./assets/fonts/Poppins-Regular.ttf",
                   "weight": "400",
                   "style": "normal"
@@ -69,7 +70,8 @@
             }
           ]
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
