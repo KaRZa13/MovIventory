@@ -26,24 +26,48 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      [
-       "expo-secure-store",
-        {
-          "configureAndroidBackup": true,
-          "faceIDPermission": "Allow $(PRODUCT_NAME) to access your Face ID biometric data."
-        }
-        ],
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/logo.png",
+          "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",
           "dark": {
-            "backgroundColor": "#000000"
+            "backgroundColor": "#d2d2d2"
           }
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            {
+              "fontFamily": "Poppins",
+              "fontDefinitions": [{
+                  "path": "./assets/fonts/Poppins-Regular.ttf",
+                  "weight": "400",
+                  "style": "normal"
+                },
+                {
+                  "path": "./assets/fonts/Poppins-SemiBold.ttf",
+                  "weight": "600",
+                  "style": "normal"
+                }
+              ]
+            },
+            {
+              "fontFamily": "LuckiestGuy",
+              "fontDefinitions": [
+                {
+                  "path": "./assets/fonts/LuckiestGuy-Regular.ttf",
+                  "weight": "400",
+                  "style": "normal"
+                }
+              ]
+            }
+          ]
         }
       ]
     ],
@@ -51,6 +75,5 @@
       "typedRoutes": true,
       "reactCompiler": true
     }
-    
   }
 }
