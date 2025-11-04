@@ -25,24 +25,6 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
   const [showQRScanner, setShowQRScanner] = useState(false)
   const [permission, requestPermission] = useCameraPermissions()
 
-  // DEV
-  const printAsyncStore = async () => {
-    console.log('printAsyncStore called')
-    const allKeys = await AsyncStorage.getAllKeys();
-    console.log('All keys in AsyncStorage:', allKeys);
-    for (const key of allKeys) {
-      const value = await AsyncStorage.getItem(key);
-      console.log(`Key: ${key}, Value: ${value}`);
-    }
-  }
-
-  // DEV
-  const delAsyncStore = async () => {
-    console.log('delAsyncStore called')
-    await AsyncStorage.clear();
-    console.log('All data cleared from AsyncStorage');
-  }
-
   const handleSignUp = async () => {
     try {
       if (!email || !password || !firstName || !lastName) {
@@ -224,15 +206,6 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
       <TouchableOpacity onPress={onSwitchToLogin}>
         <ThemedText style={[styles.switchText, {color: Colors[colorScheme ?? 'light'].primaryAccent}]}>Déjà un
           compte ? Se connecter</ThemedText>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={[styles.button, styles.halfInput, {backgroundColor: Colors[colorScheme ?? 'light'].primaryAccent}]}
-                        onPress={printAsyncStore}>
-        <ThemedText style={styles.buttonText}>printAsyncStore</ThemedText>
-      </TouchableOpacity>
-      <TouchableOpacity style={[styles.button, styles.halfInput, {backgroundColor: Colors[colorScheme ?? 'light'].primaryAccent}]}
-                        onPress={delAsyncStore}>
-        <ThemedText style={styles.buttonText}>delAsyncStore</ThemedText>
       </TouchableOpacity>
 
       <Modal visible={showQRScanner} animationType="slide">
