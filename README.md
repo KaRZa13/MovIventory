@@ -31,10 +31,10 @@ L'application utilise des technologies modernes pour offrir une expérience flui
    bun start
    ```
 
-## ⚠️ Note importante
+## ⚠️ Notes importantes
 
-Suite à une incompatibilité entre certaines versions de bibliothèques, il a été impossible de créer des \<Callout> dans la partie map. Ils ont été remplacés par un composant avec une route dynamique pour chaque cinéma. Une mise à jour future corrigera ce problème.
-
+- Suite à une incompatibilité entre certaines versions de bibliothèques, il a été impossible de créer des \<Callout> dans la partie map. Ils ont été remplacés par un composant avec une route dynamique pour chaque cinéma. Une mise à jour future corrigera ce problème.
+- La traduction est partielle, les requêtes API ont besoin d'être traduites via Deepl ou un autre service de traduction. Necessitant une carte bleue.
 ## 🛠️ Technologies utilisées
 - React Native avec Expo
 - TypeScript
