@@ -8,11 +8,11 @@ import {Ionicons} from "@expo/vector-icons"
 import {registerUser} from "@/lib/storage"
 import 'react-native-get-random-values'
 import { v4 as uuidv4 } from 'uuid'
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useTranslation} from "react-i18next"
 
 export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void }) {
   const colorScheme = useColorScheme()
-
+  const {t} = useTranslation()
   const [id, setId] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -48,8 +48,6 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
       }
 
       await registerUser(userData)
-
-      console.log('Inscription réussie ! \n Données utilisateur:', userData)
 
       setId('')
       setEmail('')
@@ -97,7 +95,7 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
     <ThemedView style={styles.container}>
 
       <ThemedView style={styles.header}>
-        <Text style={[styles.title, {color: Colors[colorScheme ?? 'light'].textPrimary}]}>Créer un compte</Text>
+        <Text style={[styles.title, {color: Colors[colorScheme ?? 'light'].textPrimary}]}>{t('signup.title_signup')}</Text>
 
         <TouchableOpacity style={styles.qrIconButton} onPress={openQRScanner}>
           <Ionicons name="qr-code" size={32} color={Colors[colorScheme ?? 'light'].textPrimary}/>
@@ -110,7 +108,7 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
             backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
             color: Colors[colorScheme ?? 'light'].textPrimary
           }]}
-          placeholder="Prénom"
+          placeholder={t('signup.firstname_placeholder')}
           placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
           value={firstName}
           onChangeText={setFirstName}
@@ -121,7 +119,7 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
             backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
             color: Colors[colorScheme ?? 'light'].textPrimary
           }]}
-          placeholder="Nom"
+          placeholder={t('signup.lastname_placeholder')}
           placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
           value={lastName}
           onChangeText={setLastName}
@@ -133,7 +131,7 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
           backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
           color: Colors[colorScheme ?? 'light'].textPrimary
         }]}
-        placeholder="Email"
+        placeholder={t('signup.mail_placeholder')}
         placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
         value={email}
         onChangeText={setEmail}
@@ -146,7 +144,7 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
           backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
           color: Colors[colorScheme ?? 'light'].textPrimary
         }]}
-        placeholder="Mot de passe"
+        placeholder={t('signup.password_placeholder')}
         placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
         value={password}
         onChangeText={setPassword}
@@ -158,7 +156,7 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
           backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
           color: Colors[colorScheme ?? 'light'].textPrimary
         }]}
-        placeholder="Adresse"
+        placeholder={t('signup.address_placeholder')}
         placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
         value={address}
         onChangeText={setAddress}
@@ -169,7 +167,7 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
           backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
           color: Colors[colorScheme ?? 'light'].textPrimary
         }]}
-        placeholder="Code postal"
+        placeholder={t('signup.zipcode_placeholder')}
         placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
         value={zipcode}
         onChangeText={setZipcode}
@@ -181,7 +179,7 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
           backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
           color: Colors[colorScheme ?? 'light'].textPrimary
         }]}
-        placeholder="Ville"
+        placeholder={t('signup.city_placeholder')}
         placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
         value={city}
         onChangeText={setCity}
@@ -192,7 +190,7 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
           backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
           color: Colors[colorScheme ?? 'light'].textPrimary
         }]}
-        placeholder="Référence carte fidélité (optionnel)"
+        placeholder={t('signup.fidelity_card_placeholder')}
         placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
         value={cardRef}
         onChangeText={setCardRef}
@@ -200,12 +198,11 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
 
       <TouchableOpacity style={[styles.button, {backgroundColor: Colors[colorScheme ?? 'light'].primaryAccent}]}
                         onPress={handleSignUp}>
-        <ThemedText style={styles.buttonText}>S&#39;inscrire</ThemedText>
+        <ThemedText style={styles.buttonText}>{t('signup.button_signup')}</ThemedText>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={onSwitchToLogin}>
-        <ThemedText style={[styles.switchText, {color: Colors[colorScheme ?? 'light'].primaryAccent}]}>Déjà un
-          compte ? Se connecter</ThemedText>
+        <ThemedText style={[styles.switchText, {color: Colors[colorScheme ?? 'light'].primaryAccent}]}>{t('signup.have_account')}</ThemedText>
       </TouchableOpacity>
 
       <Modal visible={showQRScanner} animationType="slide">
@@ -219,7 +216,7 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
             style={styles.closeButton}
             onPress={() => setShowQRScanner(false)}
           >
-            <Text style={styles.closeButtonText}>Fermer</Text>
+            <Text style={styles.closeButtonText}>{t('close')}</Text>
           </TouchableOpacity>
         </View>
       </Modal>

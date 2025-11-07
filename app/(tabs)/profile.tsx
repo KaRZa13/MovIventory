@@ -9,10 +9,12 @@ import type {User} from "@/types/user"
 import {logoutUser, loginUser, updateCurrentUser} from '@/lib/storage'
 import {useAuth} from '@/contexts/auth-context'
 import {router} from "expo-router"
-
+import {useTranslation} from "react-i18next"
+import '@/language/index'
 
 export default function Profile() {
   const colorScheme = useColorScheme()
+  const {t} = useTranslation()
   const [userProfile, setUserProfile] = useState<User | null>(null)
   const {isAuthenticated, setIsAuthenticated} = useAuth()
   const [showModificationModal, setShowModificationModal] = useState(false)
@@ -115,7 +117,7 @@ export default function Profile() {
       <ThemedView style={[styles.header, {backgroundColor: Colors[colorScheme ?? 'light'].headerBackground}]}>
         <ThemedText
           style={[styles.headerTitle, {color: Colors[colorScheme ?? 'light'].textPrimary}]}>
-          Détails du profil
+          {t('profile.title_profile')}
         </ThemedText>
         <TouchableOpacity style={styles.modificationButton} onPress={openModificationModal}>
           <Ionicons name={"create-outline"} size={32} color={Colors[colorScheme ?? 'light'].textPrimary}/>
@@ -124,28 +126,28 @@ export default function Profile() {
 
       <ThemedView style={styles.heroContent}>
         <ThemedView style={[styles.infoContainer, {backgroundColor: Colors[colorScheme ?? 'light'].background}]}>
-          <ThemedText style={[styles.label, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>Nom complet</ThemedText>
+          <ThemedText style={[styles.label, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>{t('profile.display_name')}</ThemedText>
           <ThemedText style={[styles.value, {color: Colors[colorScheme ?? 'light'].textPrimary}]}>
             {userProfile ? `${userProfile.firstName} ${userProfile.lastName}` : 'Inconnu'}
           </ThemedText>
         </ThemedView>
 
         <ThemedView style={[styles.infoContainer, {backgroundColor: Colors[colorScheme ?? 'light'].background}]}>
-          <ThemedText style={[styles.label, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>Email</ThemedText>
+          <ThemedText style={[styles.label, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>{t('profile.display_email')}</ThemedText>
           <ThemedText style={[styles.value, {color: Colors[colorScheme ?? 'light'].textPrimary}]}>
             {userProfile?.email ?? 'N/A'}
           </ThemedText>
         </ThemedView>
 
         <ThemedView style={[styles.infoContainer, {backgroundColor: Colors[colorScheme ?? 'light'].background}]}>
-          <ThemedText style={[styles.label, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>Adresse</ThemedText>
+          <ThemedText style={[styles.label, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>{t('profile.display_address')}</ThemedText>
           <ThemedText style={[styles.value, {color: Colors[colorScheme ?? 'light'].textPrimary}]}>
             {fullAddress}
           </ThemedText>
         </ThemedView>
 
         <ThemedView style={[styles.infoContainer, {backgroundColor: Colors[colorScheme ?? 'light'].background}]}>
-          <ThemedText style={[styles.label, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>Réf. carte</ThemedText>
+          <ThemedText style={[styles.label, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>{t('profile.display_fidelity_card')}</ThemedText>
           <ThemedText style={[styles.value, {color: Colors[colorScheme ?? 'light'].textPrimary}]}>
             {userProfile?.cardRef ?? 'N/A'}
           </ThemedText>
@@ -156,7 +158,7 @@ export default function Profile() {
           style={[styles.button, {backgroundColor: Colors[colorScheme ?? 'light'].primaryAccent}]}
           onPress={handleLogout}
         >
-          <ThemedText style={styles.buttonText}>Déconnexion</ThemedText>
+          <ThemedText style={styles.buttonText}>{t('profile.button_logout')}</ThemedText>
         </TouchableOpacity>
       </ThemedView>
 
@@ -164,7 +166,7 @@ export default function Profile() {
       <Modal visible={showModificationModal} animationType="slide">
         <ThemedView style={styles.modalContainer}>
           <ThemedText style={[styles.modalTitle, {color: Colors[colorScheme ?? 'light'].textPrimary}]}>
-            Modifier le profil
+            {t('update_profile.title_update_profile')}
           </ThemedText>
 
           <ThemedView style={styles.row}>
@@ -173,7 +175,7 @@ export default function Profile() {
                 backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
                 color: Colors[colorScheme ?? 'light'].textPrimary
               }]}
-              placeholder="Prénom"
+              placeholder={t('update_profile.firstname_placeholder')}
               placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
               value={editedProfile.firstName}
               onChangeText={(text) => setEditedProfile({...editedProfile, firstName: text})}
@@ -183,7 +185,7 @@ export default function Profile() {
                 backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
                 color: Colors[colorScheme ?? 'light'].textPrimary
               }]}
-              placeholder="Nom"
+              placeholder={t('update_profile.lastname_placeholder')}
               placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
               value={editedProfile.lastName}
               onChangeText={(text) => setEditedProfile({...editedProfile, lastName: text})}
@@ -195,7 +197,7 @@ export default function Profile() {
               backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
               color: Colors[colorScheme ?? 'light'].textPrimary
             }]}
-            placeholder="Email"
+            placeholder={t('update_profile.mail_placeholder')}
             placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
             value={editedProfile.email}
             onChangeText={(text) => setEditedProfile({...editedProfile, email: text})}
@@ -208,7 +210,7 @@ export default function Profile() {
               backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
               color: Colors[colorScheme ?? 'light'].textPrimary
             }]}
-            placeholder="Adresse"
+            placeholder={t('update_profile.address_placeholder')}
             placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
             value={editedProfile.address}
             onChangeText={(text) => setEditedProfile({...editedProfile, address: text})}
@@ -219,7 +221,7 @@ export default function Profile() {
               backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
               color: Colors[colorScheme ?? 'light'].textPrimary
             }]}
-            placeholder="Code postal"
+            placeholder={t('update_profile.zipcode_placeholder')}
             placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
             value={editedProfile.zipcode}
             onChangeText={(text) => setEditedProfile({...editedProfile, zipcode: text})}
@@ -231,7 +233,7 @@ export default function Profile() {
               backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
               color: Colors[colorScheme ?? 'light'].textPrimary
             }]}
-            placeholder="Ville"
+            placeholder={t('update_profile.city_placeholder')}
             placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
             value={editedProfile.city}
             onChangeText={(text) => setEditedProfile({...editedProfile, city: text})}
@@ -242,7 +244,7 @@ export default function Profile() {
               backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary,
               color: Colors[colorScheme ?? 'light'].textPrimary
             }]}
-            placeholder="Référence carte fidélité"
+            placeholder={t('update_profile.fidelity_card_placeholder')}
             placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
             value={editedProfile.cardRef}
             onChangeText={(text) => setEditedProfile({...editedProfile, cardRef: text})}
@@ -252,7 +254,7 @@ export default function Profile() {
             style={[styles.button, {backgroundColor: Colors[colorScheme ?? 'light'].primaryAccent}]}
             onPress={handleUpdateProfile}
           >
-            <ThemedText style={styles.buttonText}>Enregistrer</ThemedText>
+            <ThemedText style={styles.buttonText}>{t('update_profile.button_update_profile')}</ThemedText>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -260,7 +262,7 @@ export default function Profile() {
             onPress={() => setShowModificationModal(false)}
           >
             <ThemedText style={[styles.cancelButtonText, {color: Colors[colorScheme ?? 'light'].textSecondary}]}>
-              Annuler
+              {t('update_profile.button_cancel')}
             </ThemedText>
           </TouchableOpacity>
         </ThemedView>

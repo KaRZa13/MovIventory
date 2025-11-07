@@ -1,0 +1,58 @@
+{
+  "login": {
+    "title_login": "Login",
+    "mail_placeholder": "Email",
+    "password_placeholder": "Password",
+    "button_login": "Log in",
+    "no_account": "No account? Sign up"
+  },
+
+  "signup": {
+    "title_signup": "Create an account",
+    "firstname_placeholder": "First name",
+    "lastname_placeholder": "Last name",
+    "mail_placeholder": "Email",
+    "password_placeholder": "Password",
+    "address_placeholder": "Address",
+    "zipcode_placeholder": "Zip code",
+    "city_placeholder": "City",
+    "fidelity_card_placeholder": "Loyalty card reference (Optional)",
+    "button_signup": "Sign up",
+    "have_account": "Already have an account ? Log in",
+    "close": "Close"
+  },
+
+  "update_profile": {
+    "title_update_profile": "Edit profile",
+    "firstname_placeholder": "First name",
+    "lastname_placeholder": "Last name",
+    "mail_placeholder": "Email",
+    "address_placeholder": "Address",
+    "zipcode_placeholder": "Zip code",
+    "city_placeholder": "City",
+    "fidelity_card_placeholder": "Loyalty card reference (Optional)",
+    "button_update_profile": "Save",
+    "button_cancel": "Cancel"
+  },
+
+  "success_modal": {
+    "success": "Success",
+    "signup_success": "Profile updated successfully!"
+  },
+
+  "profile": {
+    "title_profile": "Profile details",
+    "display_name": "Full name",
+    "display_email": "Email",
+    "display_address": "Address",
+    "display_fidelity_card": "Loyalty card",
+    "button_logout": "Log out"
+  },
+
+  "navbar": {
+    "home": "Home",
+    "map": "Map",
+    "movies": "Movies",
+    "profile": "Profile"
+  }
+}

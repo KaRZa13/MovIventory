@@ -5,8 +5,11 @@ import { Colors } from '@/constants/theme'
 import { useColorScheme } from '@/hooks/use-color-scheme'
 import { Ionicons } from "@expo/vector-icons"
 import { AuthProvider, useAuth } from '@/contexts/auth-context'
+import {useTranslation} from "react-i18next"
+import '@/language/index'
 
 function TabsContent() {
+  const {t, i18n} = useTranslation()
   const colorScheme = useColorScheme()
   const { isAuthenticated } = useAuth()
 
@@ -21,7 +24,7 @@ function TabsContent() {
         <Tabs.Screen
           name="index"
           options={{
-            title: 'Home',
+            title: t('navbar.home'),
             tabBarIcon: ({ color }) =>
               <Ionicons name="home" size={28} color={color} />,
           }}
@@ -31,7 +34,7 @@ function TabsContent() {
         <Tabs.Screen
           name="map"
           options={{
-            title: 'Map',
+            title: t('navbar.map'),
             tabBarIcon: ({ color }) =>
               <Ionicons name="map" size={28} color={color} />,
           }}
@@ -41,7 +44,7 @@ function TabsContent() {
         <Tabs.Screen
           name="movies"
           options={{
-            title: "Movies",
+            title: t('navbar.movies'),
             tabBarIcon: ({ color }) => (
               <Ionicons name="videocam" size={28} color={color} />
             ),
@@ -51,7 +54,7 @@ function TabsContent() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: "Profile",
+          title: t('navbar.profile'),
           tabBarIcon: ({ color }) => (
             <Ionicons name={"person"} size={28} color={color} />
           ),

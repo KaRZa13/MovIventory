@@ -41,7 +41,7 @@ export default function CinemaDetail() {
         options={{
           title: cinema.name,
           headerBackTitle: 'Retour',
-          headerStyle: {backgroundColor: Colors[colorScheme ?? 'light'].headerBackground},
+          headerStyle: {backgroundColor: colors.headerBackground},
           headerTintColor: '#fff',
         }}
       />

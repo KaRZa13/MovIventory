@@ -1,15 +1,18 @@
 import {useState} from 'react'
-import {StyleSheet, TextInput, TouchableOpacity, useColorScheme} from 'react-native'
+import {Button, StyleSheet, TextInput, TouchableOpacity, useColorScheme} from 'react-native'
 import {ThemedText} from '@/components/themed-text'
 import {ThemedView} from '@/components/themed-view'
 import SignUp from './signUp'
 import {Colors} from '@/constants/theme'
+import '@/language/index'
+import {useTranslation} from "react-i18next";
 
 type AuthScreenProps = {
   loginCredential: (email: string, password: string) => void | Promise<void>
 }
 export default function AuthForm({loginCredential}: AuthScreenProps) {
   const colorScheme = useColorScheme()
+  const {t, i18n} = useTranslation()
   const [register, setRegister] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -28,11 +31,11 @@ export default function AuthForm({loginCredential}: AuthScreenProps) {
 
   return (
     <ThemedView style={[styles.container, {backgroundColor: Colors[colorScheme ?? 'light'].background}]}>
-      <ThemedText style={[styles.title, {color: Colors[colorScheme ?? 'light'].textPrimary}]}>Connexion</ThemedText>
+      <ThemedText style={[styles.title, {color: Colors[colorScheme ?? 'light'].textPrimary}]}>{t('login.title_login')}</ThemedText>
 
       <TextInput
         style={[styles.input, {backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary}, {color: Colors[colorScheme ?? 'light'].textPrimary}]}
-        placeholder="Email"
+        placeholder={t('login.mail_placeholder')}
         placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
         value={email}
         onChangeText={setEmail}
@@ -42,7 +45,7 @@ export default function AuthForm({loginCredential}: AuthScreenProps) {
 
       <TextInput
         style={[styles.input, {backgroundColor: Colors[colorScheme ?? 'light'].backgroundSecondary}, {color: Colors[colorScheme ?? 'light'].textPrimary}]}
-        placeholder="Mot de passe"
+        placeholder={t('login.password_placeholder')}
         placeholderTextColor={Colors[colorScheme ?? 'light'].textSecondary}
         value={password}
         onChangeText={setPassword}
@@ -51,12 +54,11 @@ export default function AuthForm({loginCredential}: AuthScreenProps) {
 
       <TouchableOpacity style={[styles.button, {backgroundColor: Colors[colorScheme ?? 'light'].primaryAccent}]}
                         onPress={handleLogin}>
-        <ThemedText style={styles.buttonText}>Se connecter</ThemedText>
+        <ThemedText style={styles.buttonText}>{t('login.button_login')}</ThemedText>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => setRegister(true)}>
-        <ThemedText style={[styles.switchText, {color: Colors[colorScheme ?? 'light'].primaryAccent}]}>Pas de compte ?
-          S&#39;inscrire</ThemedText>
+        <ThemedText style={[styles.switchText, {color: Colors[colorScheme ?? 'light'].primaryAccent}]}>{t('login.no_account')}</ThemedText>
       </TouchableOpacity>
     </ThemedView>
   )

@@ -1,0 +1,60 @@
+{
+  "login": {
+    "title_login": "Connexion",
+    "mail_placeholder": "Email",
+    "password_placeholder": "Mot de passe",
+    "button_login": "Se connecter",
+    "no_account": "Pas de compte ? S'inscrire",
+  },
+
+  "signup": {
+    "title_signup": "Créer un compte",
+    "firstname_placeholder": "Prénom",
+    "lastname_placeholder": "Nom",
+    "mail_placeholder": "Email",
+    "password_placeholder": "Mot de passe",
+    "address_placeholder": "Adresse",
+    "zipcode_placeholder": "Code postal",
+    "city_placeholder": "Ville",
+    "fidelity_card_placeholder": "Référence carte de fidélité (Optionnel)",
+    "button_signup": "S'inscrire",
+    "have_account": "Déjà un compte ? Se connecter",
+    "close": "Fermer"
+  },
+
+  "update_profile": {
+    "title_update_profile": "Modifier le profil",
+    "firstname_placeholder": "Prénom",
+    "lastname_placeholder": "Nom",
+    "mail_placeholder": "Email",
+    "address_placeholder": "Adresse",
+    "zipcode_placeholder": "Code postal",
+    "city_placeholder": "Ville",
+    "fidelity_card_placeholder": "Référence carte de fidélité (Optionnel)",
+    "button_update_profile": "Enregistrer",
+    "button_cancel": "Annuler"
+  },
+
+  "success_modal": {
+    "success": "Succès",
+    "signup_success": "Profil mis à jour avec succès !",
+  },
+
+  "profile": {
+    "title_profile": "Détails du profil",
+    "display_name": "Nom complet",
+    "display_email": "Email",
+    "display_address": "Adresse",
+    "display_fidelity_card": "Carte de fidélité",
+    "button_logout": "Se déconnecter"
+  },
+
+  "navbar": {
+    "home": "Accueil",
+    "map": "Carte",
+    "movies": "Films",
+    "profile": "Profil"
+  }
+}
+
+

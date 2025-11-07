@@ -1,50 +1,41 @@
-# Welcome to your Expo app 👋
+# Bienvenue sur MovInventory  👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 📱 Description du projet
+MovInventory est une application mobile React Native développée avec Expo, conçue pour gérer et visualiser des inventaires de films et de cinémas. L'application permet aux utilisateurs de :
+- 🎬 Consulter une liste de films
+- 🎭 Localiser des cinémas sur une carte interactive
+- 📍 Accéder aux détails de chaque cinéma via des routes dynamiques
+- 💾 Gérer un inventaire de films personnalisé
+L'application utilise des technologies modernes pour offrir une expérience fluide et intuitive sur iOS et Android.
 
-## Get started
 
-1. Install dependencies
+## 🚀 Get started 
+
+1. Installer les dépendances
 
    ```bash
    npm install
    ```
+   ou
+   ```bash
+   bun install
+   ```
 
-2. Start the app
+2. Démarrer le projet
 
    ```bash
    npx expo start
    ```
+   ou
+   ```bash
+   bun start
+   ```
 
-In the output, you'll find options to open the app in a
+## ⚠️ Note importante
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Suite à une incompatibilité entre certaines versions de bibliothèques, il a été impossible de créer des \<Callout> dans la partie map. Ils ont été remplacés par un composant avec une route dynamique pour chaque cinéma. Une mise à jour future corrigera ce problème.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🛠️ Technologies utilisées
+- React Native avec Expo
+- TypeScript
+- Bun

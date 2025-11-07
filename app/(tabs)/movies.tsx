@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {View, Text, ActivityIndicator, StyleSheet, FlatList, Image, Pressable, useColorScheme} from "react-native";
-import {fetchMovies, Movie} from "../../services/api/moviesApi"
+import {fetchMovies, Movie} from "@/services/api/moviesApi"
 import {Stack, useRouter} from "expo-router"
 import {Colors} from "@/constants/theme"
 
