@@ -24,7 +24,6 @@ install:
 build_android:
   stage: build
   script:
-    - eas whoami || eas login --token $EXPO_TOKEN
     - eas build --platform android --profile preview --non-interactive
   artifacts:
     paths:
