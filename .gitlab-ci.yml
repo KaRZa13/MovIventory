@@ -19,18 +19,14 @@ before_script:
 install:
   stage: install
   script:
-    - echo "Installation des dépendances terminée ✅"
+    - echo "✅ Installation terminée"
 
 build_android:
   stage: build
   script:
-    # Authentifie-toi avec Expo via un token GitLab CI (voir étape 3)
+    - echo "🔐 Authentification Expo..."
     - eas whoami || eas login --token $EXPO_TOKEN
-    # Build APK ou AAB (ici APK pour test rapide)
+    - echo "🏗️  Build APK en cours..."
     - eas build --platform android --profile preview --non-interactive
-  artifacts:
-    paths:
-      - dist/
-    expire_in: 1 week
   only:
     - main
