@@ -1,33 +1,20 @@
 image: node:alpine
 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .npm
+
+
 stages:
-  - install
   - build
 
-cache:
-  paths:
-    - node_modules/
-
-variables:
-  EXPO_TOKEN: $EXPO_TOKEN
-  CI: "true"
-
 before_script:
-  - npm ci
-  - npm install -g eas-cli expo-cli
+  - npm ci --cache .npm
 
-install:
-  stage: install
-  script:
-    - echo "Installation des dépendances terminée ✅"
 
-build_android:
+eas-build:
   stage: build
   script:
-    - eas build --platform android --profile preview --non-interactive
-  artifacts:
-    paths:
-      - dist/
-    expire_in: 1 week
-  only:
-    - main
+    - apk add --no-cache bash
+    - npx eas-cli build --platform all --non-interactive --no-wait
