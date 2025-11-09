@@ -26,7 +26,7 @@ build_android:
   stage: build
 #  script:
   script:
-    - echo "Length du token : ${#EXPO_TOKEN}"
+    - echo "${#EXPO_TOKEN}"
     - bunx eas login --token $EXPO_TOKEN
   only:
     - main
