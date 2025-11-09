@@ -1,4 +1,4 @@
-image: node:18
+image: oven/bun:1
 
 stages:
   - install
@@ -7,26 +7,27 @@ stages:
 cache:
   paths:
     - node_modules/
+    - bun.lockb
 
 variables:
   EXPO_TOKEN: $EXPO_TOKEN
   CI: "true"
 
 before_script:
-  - npm ci
-  - npm install -g eas-cli expo-cli
+  - bun install
+  - bun add -g eas-cli expo-cli
 
 install:
   stage: install
   script:
-    - echo "✅ Installation terminée"
+    - echo "✅ Dépendances installées avec Bun"
 
 build_android:
   stage: build
   script:
     - echo "🔐 Authentification Expo..."
-    - eas whoami || eas login --token $EXPO_TOKEN
+    - bunx eas whoami || bunx eas login --token $EXPO_TOKEN
     - echo "🏗️  Build APK en cours..."
-    - eas build --platform android --profile preview --non-interactive
+    - bunx eas build --platform android --profile preview --non-interactive
   only:
     - main
