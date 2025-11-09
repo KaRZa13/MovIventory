@@ -9,6 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
+      "bundleIdentifier": "com.KaRZa.MovInventory",
       "supportsTablet": true
     },
     "android": {
