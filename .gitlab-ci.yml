@@ -17,6 +17,7 @@ variables:
 before_script:
   - bun install
   - bun add -g eas-cli expo-cli
+  - eas login --token $EXPO_TOKEN
 
 eas-build:
   stage: build
