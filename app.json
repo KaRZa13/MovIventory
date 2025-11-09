@@ -9,7 +9,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "bundleIdentifier": "com.monnom.monapp",
+      "bundleIdentifier": "com.KaRZa.MovInventory",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
