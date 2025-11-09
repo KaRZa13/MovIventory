@@ -22,9 +22,14 @@ install:
   script:
     - echo "✅ Dépendances installées avec Bun"
 
-#build_android:
-#  stage: build
+build_android:
+  stage: build
 #  script:
+  script:
+    - echo "Length du token : ${#EXPO_TOKEN}"
+    - bunx eas login --token $EXPO_TOKEN
+  only:
+    - main
 #    - echo "🔐 Authentification Expo..."
 #    - bunx eas whoami || bunx eas login --token $EXPO_TOKEN
 #    - echo "🏗️  Build APK en cours..."
@@ -32,11 +37,5 @@ install:
 #  only:
 #    - main
 
-test_token:
-  stage: build
-  script:
-    - echo "Length du token : ${#EXPO_TOKEN}"
-    - bunx eas login --token $EXPO_TOKEN
-  only:
-    - main
+
 
