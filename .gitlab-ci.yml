@@ -1,28 +1,36 @@
 image: node:alpine
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - .npm
-
-
 stages:
   - build
+  - fetch-url
 
 before_script:
   - apk add --no-cache bash git jq
   - npm ci --cache .npm
 
-
 eas-build:
   stage: build
   script:
-    - echo "🔧 Launching Expo EAS Cloud build..."
-    - BUILD_INFO=$(npx eas-cli build --platform android --non-interactive --json)
-    - echo $BUILD_INFO | jq -r '.builds[0].artifacts.buildUrl' > build-url.txt
-    - echo "✅ Build triggered! Download link stored in build-url.txt"
+    - echo "🔧 Triggering Expo EAS Cloud build..."
+    - BUILD_INFO=$(npx eas-cli build --platform android --profile preview-apk --non-interactive --json)
+    - echo "$BUILD_INFO" > build-info.json
+    - echo "✅ Build triggered! Build info saved."
+  artifacts:
+    paths:
+      - build-info.json
+    expire_in: never
+
+# Job 2 : récupère l’URL du build
+fetch-build-url:
+  stage: fetch-url
+  needs: ["eas-build"]
+  script:
+    - echo "🔎 Fetching build URL..."
+    - BUILD_ID=$(jq -r '.[0].id' build-info.json)
+    - BUILD_JSON=$(npx eas-cli build:view $BUILD_ID --json)
+    - echo "$BUILD_JSON" | jq -r '.[0].artifacts.buildUrl' > build-url.txt
+    - echo "✅ Build URL stored in build-url.txt"
   artifacts:
     paths:
       - build-url.txt
     expire_in: never
-
