@@ -12,7 +12,7 @@ eas-build:
   stage: build
   script:
     - echo "🔧 Triggering Expo EAS Cloud build..."
-    - BUILD_INFO=$(npx eas-cli build --platform android --profile preview-apk --non-interactive --json)
+    - BUILD_INFO=$(npx eas-cli build --platform android --profile build --non-interactive --json)
     - echo "$BUILD_INFO" > build-info.json
     - echo "✅ Build triggered! Build info saved."
   artifacts:
