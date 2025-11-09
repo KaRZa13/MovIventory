@@ -21,7 +21,7 @@ before_script:
 eas-build:
   stage: build
   script:
-    - npx eas-cli build --platform all --non-interactive --no-wait
+    - bunx eas-cli build --platform all --non-interactive --no-wait
 
 
 
