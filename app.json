@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "MovInventory",
-    "slug": "app_android",
+    "slug": "movinventory",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/splash.png",
@@ -76,6 +76,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "7fe38c84-f7f2-4b16-870d-9eecd2fe0c22"
+      }
+    },
+    "owner": "rafael_muro"
   }
 }
