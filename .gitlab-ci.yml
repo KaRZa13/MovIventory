@@ -8,7 +8,7 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
-    - bun.lockb
+    - bun.lock
 
 variables:
   EXPO_TOKEN: $EXPO_TOKEN
