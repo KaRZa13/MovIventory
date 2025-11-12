@@ -23,11 +23,9 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      # 3️⃣ Installe les dépendances
       - name: Install dependencies
         run: npm install
 
-      # 4️⃣ Lance le build EAS (distant)
       - name: Build with EAS
         id: eas_build
         env:
@@ -41,15 +39,13 @@ jobs:
           DOWNLOAD_URL=$(eas build:view $BUILD_ID --json | jq -r '.artifacts.buildUrl')
           echo "DOWNLOAD_URL=$DOWNLOAD_URL" >> $GITHUB_ENV
 
-      # 5️⃣ Télécharge le .apk depuis Expo
       - name: Download APK
         run: |
           curl -L ${{ env.DOWNLOAD_URL }} -o app-release.apk
 
-      # 6️⃣ Crée une release GitHub avec le .apk
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: app-release.apk
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
