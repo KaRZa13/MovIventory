@@ -31,6 +31,9 @@ jobs:
         env:
           EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
         run: |
+          sudo apt-get install -y jq
+          export EXPO_TOKEN=${{ secrets.EAS_TOKEN }}
+          
           # Lance un build distant et capture l'ID
           BUILD_ID=$(eas build -p android --profile preview --non-interactive --json | jq -r '.[0].id')
           echo "BUILD_ID=$BUILD_ID" >> $GITHUB_ENV
