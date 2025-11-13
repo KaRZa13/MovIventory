@@ -1,12 +1,11 @@
-name: EAS Build & Release APK
-
-permissions:
-  contents: write
+name: Release APK
 
 on:
   push:
-    branches: ['main']
+    tags:
+      - 'v*.*.*'
   workflow_dispatch:
+
 
 jobs:
   build-and-release:
@@ -27,33 +26,28 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build with EAS
-        id: eas_build
+      - name: Run EAS build
         env:
-          EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
+          EAS_TOKEN: ${{ secrets.TOKEN_GITHUB }}
         run: |
-          sudo apt-get install -y jq
-          export EXPO_TOKEN=${{ secrets.EAS_TOKEN }}
-          
-          # Lance un build distant et capture l'ID
-          BUILD_ID=$(eas build -p android --profile preview --non-interactive --json | jq -r '.[0].id')
-          echo "BUILD_ID=$BUILD_ID" >> $GITHUB_ENV
+          eas build --platform android --profile preview --non-interactive --output app-release.apk
 
-          # Attend la fin du build et récupère l'URL du fichier .apk
-          DOWNLOAD_URL=$(eas build:view $BUILD_ID --json | jq -r '.artifacts.buildUrl')
-          echo "DOWNLOAD_URL=$DOWNLOAD_URL" >> $GITHUB_ENV
-
-      - name: Download APK
+      - name: Create Tag
+        id: create_tag
         run: |
-          curl -L ${{ env.DOWNLOAD_URL }} -o app-release.apk
-
-      - name: Upload to GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v1.0.0
-          files: app-release.apk
-          name: "Latest Android Build"
-          body: "APK auto-buildé par GitHub Actions via EAS CLI"
+          TAG_NAME="v$(date +'%Y.%m.%d.%H%M%S')" 
+          git tag $TAG_NAME 
+          git push origin $TAG_NAME
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+      - name: Upload APK to Github
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.create_tag.outputs.tag_name }}
+          files: app-release-apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
 
