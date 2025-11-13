@@ -3,63 +3,64 @@ name: EAS Build & Release APK
 permissions:
   contents: write
 
-  on:
-    push:
-      branches: [ 'main' ]
-    workflow_dispatch:
+on:
+  push:
+    branches: [ 'main' ]
+  workflow_dispatch:
 
-    jobs:
-      build-and-release:
-        runs-on: ubuntu-latest
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
 
-        steps:
-          - name: Checkout repository
-            uses: actions/checkout@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-          - name: Set up Node.js
-            uses: actions/setup-node@v4
-            with: node-version:18
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version:18
 
-          - name: Install EAS CLI
-            run: npm install -g eas-cli
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
 
-          - name: Install dependencies
-            run: npm install
+      - name: Install dependencies
+        run: npm install
 
-          - name: Build with EAS
-            id: eas_build
-            env:
-              EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
-            run: |
-              sudo apt-get install -y jq 
-              export EXPO_TOKEN=${{ secrets.EAS_TOKEN }} 
-              
-              # Lance un build distant et capture l'ID
-              BUILD_ID=$(eas build -p android --profile preview --non-interactive --json | jq -r '.[0].id') 
-              echo "BUILD_ID=$BUILD_ID" >> $GITHUB_ENV 
-              
-              # Attend la fin du build et récupère l'URL du fichier .apk 
-              DOWNLOAD_URL=$(eas build:view $BUILD_ID --json | jq -r '.artifacts.buildUrl') 
-              echo "DOWNLOAD_URL=$DOWNLOAD_URL" >> $GITHUB_ENV 
+      - name: Build with EAS
+        id: eas_build
+        env:
+          EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
+        run: |
+          sudo apt-get install -y jq 
+          export EXPO_TOKEN=${{ secrets.EAS_TOKEN }} 
+          
+          # Lance un build distant et capture l'ID
+          BUILD_ID=$(eas build -p android --profile preview --non-interactive --json | jq -r '.[0].id') 
+          echo "BUILD_ID=$BUILD_ID" >> $GITHUB_ENV 
+          
+          # Attend la fin du build et récupère l'URL du fichier .apk 
+          DOWNLOAD_URL=$(eas build:view $BUILD_ID --json | jq -r '.artifacts.buildUrl') 
+          echo "DOWNLOAD_URL=$DOWNLOAD_URL" >> $GITHUB_ENV 
 
-          - name: Download APK
-            run: | 
-              curl -L ${{ env.DOWNLOAD_URL }} -o app-release.apk 
+      - name: Download APK
+        run: |
+          curl -L ${{ env.DOWNLOAD_URL }} -o app-release.apk 
 
-          - name: Create Tag
-            id: create_tag
-            run: | 
-              TAG_NAME="v$(date +'%Y.%m.%d.%H%M%S')" 
-              git tag $TAG_NAME 
-              git push origin $TAG_NAME
-              echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
-            env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Tag
+        id: create_tag
+        run: |
+          TAG_NAME="v$(date +'%Y.%m.%d.%H%M%S')" 
+          git tag $TAG_NAME 
+          git push origin $TAG_NAME
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          - name: Upload to GitHub Release
-            uses: softprops/action-gh-release@v2
-            with:
-              tag_name: ${{ steps.create_tag.outputs.tag_name }}
-              files: app-release.apk
-            env:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.create_tag.outputs.tag_name }}
+          files: app-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
