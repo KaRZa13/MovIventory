@@ -1,4 +1,5 @@
 # Bienvenue sur MovInventory  👋
+made by Matancolael
 
 ## 📱 Description du projet
 MovInventory est une application mobile React Native développée avec Expo, conçue pour gérer et visualiser des inventaires de films et de cinémas. L'application permet aux utilisateurs de :
