@@ -41,11 +41,9 @@ export default function MapScreen() {
           <Marker
             key={index}
             coordinate={cine}
-
+            title={cine.name}
           >
-              <Callout onPress={() => {router.push(`/cinema/${cine.id}`)}}>
-                  <Text>{cine.name}</Text>
-              </Callout>
+            <Callout onPress={() => {router.push(`/cinema/${cine.id}`)}}/>
           </Marker>
         ))}
       </MapView>
