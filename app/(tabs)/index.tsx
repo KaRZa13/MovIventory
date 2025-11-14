@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         fontFamily: "LuckiestGuy",
-        marginBottom: 20,
+        marginBottom: 22,
     }
 })
