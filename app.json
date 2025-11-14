@@ -8,6 +8,7 @@
     "scheme": "appandroid",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "assetBundlePatterns": ["**/*"],
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
