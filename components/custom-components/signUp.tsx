@@ -32,6 +32,10 @@ export default function SignUp({onSwitchToLogin}: { onSwitchToLogin: () => void 
         return;
       }
 
+      if (cardRef.length !== 9) {
+        console.error('La référence de la carte de fidélité doit contenir exactement 9 caractères.')
+      }
+
       const newId = id?.trim() || uuidv4()
 
       const userData = {

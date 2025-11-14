@@ -2,7 +2,7 @@ import {ActivityIndicator, StyleSheet, Text, View} from 'react-native'
 import {fetchCinemas, Cinema} from "@/services/api/cinemasApi"
 import {router} from "expo-router"
 import React, {useState, useEffect, useRef} from "react"
-import MapView, {Marker, Region} from "react-native-maps"
+import MapView, {Callout, Marker, Region} from "react-native-maps"
 
 export default function MapScreen() {
 
@@ -41,8 +41,12 @@ export default function MapScreen() {
           <Marker
             key={index}
             coordinate={cine}
-            onPress={() => {router.push(`/cinema/${cine.id}`)}}
-          />
+
+          >
+              <Callout onPress={() => {router.push(`/cinema/${cine.id}`)}}>
+                  <Text>{cine.name}</Text>
+              </Callout>
+          </Marker>
         ))}
       </MapView>
     </View>
